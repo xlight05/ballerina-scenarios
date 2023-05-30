@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package flightbooking;
+
+service FlightBookingService {
+  rpc bookFlight(ReservationRequest) returns (CreateReservationResponse);
+}
+
+
+message ReservationRequest {
+  int32 flightId = 1;
+  repeated Passenger passengers = 2;
+  int32 total_seats = 3;
+  float total_price = 4;
+}
+
+message CreateReservationResponse {
+  string reservationId = 1;
+  string message = 2;
+}
+
+message GetReservationRequest {
+  string reservation_id = 1;
+}
+
+message GetReservationResponse {
+  ReservationRequest reservation = 1;
+  string message = 2;
+}
+
+message Passenger {
+  string name = 1;
+  string passport_number = 2;
+}

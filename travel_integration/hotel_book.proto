@@ -3,7 +3,7 @@ syntax = "proto3";
 package hotelbook;
 
 service HotelBookingService {
-  rpc bookHotel(HotelBookingRequest) returns (CreateReservationResponse);
+  rpc bookHotel(HotelBookingRequest) returns (HotelReservationResponse);
 }
 
 message HotelBookingRequest {
@@ -14,7 +14,6 @@ message HotelBookingRequest {
   int32 noOfRooms = 5;
 }
 
-message CreateReservationResponse {
+message HotelReservationResponse {
   string reservationId = 1;
-  string message = 2;
 }

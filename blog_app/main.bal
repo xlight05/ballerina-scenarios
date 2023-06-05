@@ -34,8 +34,8 @@ service /blog on new http:Listener(9090) {
 
     function notifySlack(Blog blog) returns error? {
         slack:Message messageParams = {
-            channelName: "ss",
-            text: blog.title
+            channelName: "Test Channel",
+            text: "New Blog is created : " + blog.title
         };
         _ = check self.slackClient->postMessage(messageParams);
     }

@@ -2,11 +2,11 @@ syntax = "proto3";
 
 package vehiclerent;
 
-service CarRentService {
-  rpc rentCar(RentRequest) returns (CreateReservationResponse);
+service VehicleRentService {
+  rpc rentCar(VehicleRentRequest) returns (VehicleReservationResponse);
 }
 
-message RentRequest {
+message VehicleRentRequest {
   VEHICLE_TYPE type = 1;
   int32 count = 2;
 }
@@ -18,7 +18,6 @@ enum VEHICLE_TYPE{
     BUS = 3;  
 }
 
-message CreateReservationResponse {
+message VehicleReservationResponse {
   string reservationId = 1;
-  string message = 2;
 }

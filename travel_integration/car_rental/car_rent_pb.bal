@@ -1,9 +1,9 @@
 import ballerina/grpc;
 import ballerina/protobuf;
 
-public const string CAR_RENT_DESC = "0A0E6361725F72656E742E70726F746F120B76656869636C6572656E7422520A0B52656E7452657175657374122D0A047479706518012001280E32192E76656869636C6572656E742E56454849434C455F5459504552047479706512140A05636F756E741802200128055205636F756E7422070A05456D7074792A330A0C56454849434C455F5459504512080A0442494B45100012070A03434152100112070A0356414E100212070A03425553100332490A0E43617252656E745365727669636512370A0772656E7443617212182E76656869636C6572656E742E52656E74526571756573741A122E76656869636C6572656E742E456D707479620670726F746F33";
+public const string CAR_RENT_DESC = "0A0E6361725F72656E742E70726F746F120B76656869636C6572656E7422590A1256656869636C6552656E7452657175657374122D0A047479706518012001280E32192E76656869636C6572656E742E56454849434C455F5459504552047479706512140A05636F756E741802200128055205636F756E7422420A1A56656869636C655265736572766174696F6E526573706F6E736512240A0D7265736572766174696F6E4964180120012809520D7265736572766174696F6E49642A330A0C56454849434C455F5459504512080A0442494B45100012070A03434152100112070A0356414E100212070A03425553100332690A1256656869636C6552656E745365727669636512530A0772656E74436172121F2E76656869636C6572656E742E56656869636C6552656E74526571756573741A272E76656869636C6572656E742E56656869636C655265736572766174696F6E526573706F6E7365620670726F746F33";
 
-public isolated client class CarRentServiceClient {
+public isolated client class VehicleRentServiceClient {
     *grpc:AbstractClientEndpoint;
 
     private final grpc:Client grpcClient;
@@ -13,36 +13,36 @@ public isolated client class CarRentServiceClient {
         check self.grpcClient.initStub(self, CAR_RENT_DESC);
     }
 
-    isolated remote function rentCar(RentRequest|ContextRentRequest req) returns Empty|grpc:Error {
+    isolated remote function rentCar(VehicleRentRequest|ContextVehicleRentRequest req) returns VehicleReservationResponse|grpc:Error {
         map<string|string[]> headers = {};
-        RentRequest message;
-        if req is ContextRentRequest {
+        VehicleRentRequest message;
+        if req is ContextVehicleRentRequest {
             message = req.content;
             headers = req.headers;
         } else {
             message = req;
         }
-        var payload = check self.grpcClient->executeSimpleRPC("vehiclerent.CarRentService/rentCar", message, headers);
+        var payload = check self.grpcClient->executeSimpleRPC("vehiclerent.VehicleRentService/rentCar", message, headers);
         [anydata, map<string|string[]>] [result, _] = payload;
-        return <Empty>result;
+        return <VehicleReservationResponse>result;
     }
 
-    isolated remote function rentCarContext(RentRequest|ContextRentRequest req) returns ContextEmpty|grpc:Error {
+    isolated remote function rentCarContext(VehicleRentRequest|ContextVehicleRentRequest req) returns ContextVehicleReservationResponse|grpc:Error {
         map<string|string[]> headers = {};
-        RentRequest message;
-        if req is ContextRentRequest {
+        VehicleRentRequest message;
+        if req is ContextVehicleRentRequest {
             message = req.content;
             headers = req.headers;
         } else {
             message = req;
         }
-        var payload = check self.grpcClient->executeSimpleRPC("vehiclerent.CarRentService/rentCar", message, headers);
+        var payload = check self.grpcClient->executeSimpleRPC("vehiclerent.VehicleRentService/rentCar", message, headers);
         [anydata, map<string|string[]>] [result, respHeaders] = payload;
-        return {content: <Empty>result, headers: respHeaders};
+        return {content: <VehicleReservationResponse>result, headers: respHeaders};
     }
 }
 
-public client class CarRentServiceEmptyCaller {
+public client class VehicleRentServiceVehicleReservationResponseCaller {
     private grpc:Caller caller;
 
     public isolated function init(grpc:Caller caller) {
@@ -53,11 +53,11 @@ public client class CarRentServiceEmptyCaller {
         return self.caller.getId();
     }
 
-    isolated remote function sendEmpty(Empty response) returns grpc:Error? {
+    isolated remote function sendVehicleReservationResponse(VehicleReservationResponse response) returns grpc:Error? {
         return self.caller->send(response);
     }
 
-    isolated remote function sendContextEmpty(ContextEmpty response) returns grpc:Error? {
+    isolated remote function sendContextVehicleReservationResponse(ContextVehicleReservationResponse response) returns grpc:Error? {
         return self.caller->send(response);
     }
 
@@ -74,24 +74,25 @@ public client class CarRentServiceEmptyCaller {
     }
 }
 
-public type ContextEmpty record {|
-    Empty content;
+public type ContextVehicleRentRequest record {|
+    VehicleRentRequest content;
     map<string|string[]> headers;
 |};
 
-public type ContextRentRequest record {|
-    RentRequest content;
+public type ContextVehicleReservationResponse record {|
+    VehicleReservationResponse content;
     map<string|string[]> headers;
 |};
 
 @protobuf:Descriptor {value: CAR_RENT_DESC}
-public type Empty record {|
-|};
-
-@protobuf:Descriptor {value: CAR_RENT_DESC}
-public type RentRequest record {|
+public type VehicleRentRequest record {|
     VEHICLE_TYPE 'type = BIKE;
     int count = 0;
+|};
+
+@protobuf:Descriptor {value: CAR_RENT_DESC}
+public type VehicleReservationResponse record {|
+    string reservationId = "";
 |};
 
 public enum VEHICLE_TYPE {

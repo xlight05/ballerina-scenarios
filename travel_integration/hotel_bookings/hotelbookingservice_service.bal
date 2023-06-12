@@ -1,7 +1,7 @@
 import ballerina/grpc;
 import ballerina/uuid;
 
-listener grpc:Listener ep = new (9090);
+listener grpc:Listener ep = new (9093);
 
 @grpc:Descriptor {value: HOTEL_BOOK_DESC}
 service "HotelBookingService" on ep {

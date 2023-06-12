@@ -9,7 +9,6 @@ Run the following command to start the database
 docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -v "./db/init.sql:/docker-entrypoint-initdb.d/init.sql" -d mysql:latest
 ```
 
-
 ## Setting Configurables
 In Ballerina, you can make your code configurable in different environments. These fields are marked as configurables in the code.
 
@@ -30,7 +29,6 @@ user="root"
 password="root"
 database="storedb"
 ```
-
 
 ## Running the Sample
 Now we can run the ballerina package using following command.

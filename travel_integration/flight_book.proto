@@ -16,5 +16,5 @@ message FlightReservationResponse {
 
 message Passenger {
   string name = 1;
-  string passport_number = 2;
+  string passportNumber = 2;
 }

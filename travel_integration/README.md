@@ -9,6 +9,8 @@ This sample takes the use case of travel agency as an example to demonstrate how
 
 
 ## Generating Protocol Buffers
+The following commands were used to generate the protocol buffers for the sample. Since the generated code is already included in the sample, you don't need to run these commands again. If you make any changes to the proto files, you can use these commands to generate the code again.
+
 ```bash
 bal grpc --mode service --input car_rent.proto --output car_rental/
 bal grpc --mode service --input flight_book.proto --output flight_res/
@@ -27,4 +29,32 @@ bal run flight_res/
 bal run hotel_bookings/
 
 bal run travel/
+```
+
+## Testing the sample
+You should be able to call the booking service using the following curl command. It will talk to other internal gRPC services internally and perform the booking.
+
+```bash
+curl --location 'http://localhost:9090/booking' \
+--header 'Content-Type: application/json' \
+--data '{
+    "username" : "xlight",
+    "hotelBooking": {
+        "hotelName": "Citadel",
+        "guestName": "Anjana Supun",
+        "checkinDate": "11",
+        "checkoutDate": "12",
+        "noOfRooms": 1
+    },
+    "passengers": [
+        {
+            "name": "Anjana Supun",
+            "passportNumber": "2"
+        }
+    ],
+    "vehicle": {
+        "type": "BIKE",
+        "count": 1
+    }
+}'
 ```

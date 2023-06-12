@@ -1,0 +1,6 @@
+(docker compose up -d)
+(cd order_service && bal run &)
+(cd payment_service && bal run &)
+(cd inventory_service && bal run &)
+(cd email_service && bal run &)
+(cd sms_service && bal run &)

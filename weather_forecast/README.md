@@ -11,3 +11,7 @@ apiKey = "xxx"
 ```
 
 ## Running the Sample
+Execute the following command to run this sample.
+```bash
+bal run
+```

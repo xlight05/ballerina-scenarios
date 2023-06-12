@@ -1,8 +1,8 @@
 [package]
-org = "anjana"
-name = "order_events"
+org = "wso2"
+name = "orders.types"
 version = "0.1.0"
-distribution = "2201.5.0"
+distribution = "2201.6.0"
 
 [build-options]
 observabilityIncluded = true

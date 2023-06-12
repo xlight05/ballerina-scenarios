@@ -35,6 +35,7 @@ Upon user clicking submit button, the HTTP POST endpoint will be called in the O
 ## Running the Sample
 
 - Start the Kafka Broker - `docker compose up -d`
+- Publish types package to local central - `(cd order_types && bal pack && bal push --repository=local)`
 - Start Order Service - `(cd order_service && bal run)`
 - Start Inventory Service - `(cd inventory_service && bal run)`
 - Start Payment Service - `(cd payment_service && bal run)`
